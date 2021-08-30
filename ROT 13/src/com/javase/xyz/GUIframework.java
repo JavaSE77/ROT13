@@ -27,6 +27,8 @@ public class GUIframework extends JFrame implements ActionListener {
 	private Rotter rot;
 	private JButton submitButton = new JButton("Rotate");
 	private JTextField textToROT;
+	//holds the number of tims the text has been rotated
+	private int numIterations = 0;
 
 // JTextField
  static JTextField t;
@@ -85,7 +87,10 @@ public class GUIframework extends JFrame implements ActionListener {
 
     	 try {
 			String rotatedText = rot.rotate(textToROT.getText());
-			textToROT.setText(rotatedText);
+			
+			
+			
+			textToROT.setText(setUpperOrLower(rotatedText));
 		} catch (LetterOutOfACSIIRange e1) {
 			textToROT.setText("An error occured");
 			// TODO Auto-generated catch block
@@ -95,4 +100,17 @@ public class GUIframework extends JFrame implements ActionListener {
      }
  }
 
+ private String setUpperOrLower(String input) {
+   String output = null;
+   
+   if((numIterations%2) == 1) {
+     output = input.toLowerCase();
+   } else {
+     output = input.toUpperCase();
+   }
+   
+   numIterations++;
+   return output;
+ }
+ 
 }
